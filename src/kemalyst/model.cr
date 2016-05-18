@@ -248,6 +248,15 @@ abstract class Kemalyst::Model
     return true
   end
 
+  # Migrate will examine the current schema and additively update to match the
+  # model.
+  def self.migrate
+    if db = @@database
+      db.migrate(@@table_name, fields)
+    end
+    return true
+  end
+
   # The save method will check to see if the @id exists yet.  If it does it
   # will call the update method, otherwise it will call the create method.
   # This will update the timestamps apropriately.
